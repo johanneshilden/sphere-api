@@ -60,6 +60,26 @@ FORMAT: 1A
 
 ## Area [/area]
         
+### Retrieve an area [GET]
+
++ Response 200 (application/json)
+
+        {
+            "url": "/area/1"
+            "name": "Area 1",
+            "region": {
+                "name": "Pemba",
+                "url": "/region/5"
+
+            },
+            "depot": {
+                "name": "Grand Central Station",
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "url": "/depot/2",
+            }
+        }
+
 ### Create a new area [POST]
 
 + Response 200 (application/json)
