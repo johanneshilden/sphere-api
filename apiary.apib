@@ -11,11 +11,13 @@ FORMAT: 1A
     + limit (number, optional) - The maximum number of results to return.
         + Default: `20`
 
+    + offset (number, optional) - Offset from which to start returning items.
+        + Default: `0`
+
 + Response 200 (application/json)
 
         [
             {
-                "url": "/area/1"
                 "name": "Area 1",
                 "region": {
                     "name": "Pemba",
@@ -27,37 +29,8 @@ FORMAT: 1A
                     "latitude": 0.0,
                     "longitude": 0.0,
                     "url": "/depot/2",
-                }
-            },
-            {
-                "url": "/area/2"
-                "name": "Area 2",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
-
                 },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                }
-            },
-            {
-                "url": "/area/3"
-                "name": "Area 3",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
-
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                }
+                "url": "/area/1"
             }
         ]
 
@@ -68,7 +41,6 @@ FORMAT: 1A
 + Response 200 (application/json)
 
         {
-            "url": "/area/1"
             "name": "Area 1",
             "region": {
                 "name": "Pemba",
@@ -80,7 +52,8 @@ FORMAT: 1A
                 "latitude": 0.0,
                 "longitude": 0.0,
                 "url": "/depot/2",
-            }
+            },
+            "url": "/area/1"
         }
 
 ### Create a new area [POST]
@@ -103,37 +76,233 @@ FORMAT: 1A
 
 ### List all complaints [GET]
 
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
+
 ## Complaint [/complaints/{id}]
 
 ## Customer Collection [/customers]
+
+### List all customers [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
 
 ## Customer [/customers/{id}]
 
 ## Customer Registration Collection [/customer_registrations]
 
+### List all customer registrations [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
+
 ## Customer Registration [/customer_registrations/{id}]
 
 ## Depot Collection [/depots]
+
+### List all depots [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
 
 ## Depot [/depots/{id}]
 
 ## Dispatch Collection [/dispatches]
 
+### List all dispatches [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
+
 ## Dispatch [/dispatches/{id}]
 
 ## Order Collection [/orders]
+
+### List all orders [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
 
 ## Order [/orders/{id}]
 
 ## Price Category Collection [/price_categories]
 
+### List all price categories [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
+
 ## Price Category [/price_categories/{id}]
 
 ## Product Collection [/products]
 
+### List all products [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
+
 ## Product [/products/{id}]
 
 ## Region Collection [/regions]
+
+### List all regions [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
 
 ## Region [/regions/{id}]
 
@@ -148,13 +317,79 @@ FORMAT: 1A
 
 ## Task Collection [/tasks]
 
+### List all tasks [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
+
 ## Task [/tasks/{id}]
 
 ## Vehicle Collection [/vehicles]
 
+### List all vehicles [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
+
 ## Vehicle [/vehicles/{id}]
 
 ## Weight Class Collection [/weight_classes]
+
+### List all weight classes [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Area 1",
+                "region": {
+                    "name": "Pemba",
+                    "url": "/region/5"
+
+                },
+                "depot": {
+                    "name": "Grand Central Station",
+                    "latitude": 0.0,
+                    "longitude": 0.0,
+                    "url": "/depot/2",
+                },
+                "url": "/area/1"
+            }
+        ]
 
 ## Weight Class [/weight_classes/{id}]
 
