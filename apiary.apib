@@ -4,7 +4,7 @@ FORMAT: 1A
 
 ## Group Areas
 
-## GET /areas?limit&offset
+## GET /areas?limit={limit}&offset={offset}
 
 List all areas.
 
@@ -43,9 +43,13 @@ Create a new area.
 
         {
             "name": "Area 1",
-            "region": "/region/5",
-            "depot": "/depot/2"
+            "region": 5
         }
+
+An Area object has the following attributes:
+
++ name
++ region
 
 + Response 201 
 
