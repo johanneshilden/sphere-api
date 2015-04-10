@@ -2,9 +2,9 @@ FORMAT: 1A
 
 # Sphere
 
-## Areas Collection [/areas?limit&offset]
+## GET /areas?limit&offset
 
-### List all areas [GET]
+List all areas 
 
 + Parameters
 
@@ -36,6 +36,22 @@ FORMAT: 1A
 ## Areas Collection [/areas]
 
 ### Create a new area [POST]
+
++ Request (application/json)
+
+        {
+            "name": "Area 1",
+            "region": {
+                "url": "/region/5"
+            },
+            "depot": {
+                "name": "Grand Central Station",
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "url": "/depot/2",
+            },
+            "url": "/area/1"
+        }
 
 + Response 200 (application/json)
 
