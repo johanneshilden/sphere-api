@@ -2,7 +2,7 @@ FORMAT: 1A
 
 # Sphere
 
-## Area Collection [/areas]
+## Area Collection [/areas?limit&offset]
 
 ### List all areas [GET]
 
@@ -32,6 +32,8 @@ FORMAT: 1A
                 "url": "/area/1"
             }
         ]
+
+## Area [/areas]
 
 ### Create a new area [POST]
 
@@ -71,7 +73,7 @@ FORMAT: 1A
 
 + Response 200 (application/json)
 
-## Complaint Collection [/complaints]
+## Complaint Collection [/complaints?limit&offset]
 
 ### List all complaints [GET]
 
@@ -131,7 +133,7 @@ FORMAT: 1A
 
 ## Customer [/customers/{id}]
 
-## Customer Registration Collection [/customer_registrations]
+## Customer Registration Collection [/customer_registrations?limit&offset]
 
 ### List all customer registrations [GET]
 
@@ -183,7 +185,7 @@ FORMAT: 1A
 
 ## Depot [/depots/{id}]
 
-## Dispatch Collection [/dispatches]
+## Dispatch Collection [/dispatches?limit&offset]
 
 ### List all dispatches [GET]
 
@@ -217,7 +219,7 @@ FORMAT: 1A
 
 ## Dispatch [/dispatches/{id}]
 
-## Order Collection [/orders]
+## Order Collection [/orders?limit&offset]
 
 ### List all orders [GET]
 
@@ -277,7 +279,7 @@ FORMAT: 1A
 
 ## Price Category [/price_categories/{id}]
 
-## Product Collection [/products]
+## Product Collection [/products?limit&offset]
 
 ### List all products [GET]
 
@@ -350,7 +352,9 @@ FORMAT: 1A
 
 ### Adjust stock for a product [POST]
 
-## Task Collection [/tasks]
++ Response 200 (application/json)
+
+## Task Collection [/tasks?limit&offset]
 
 ### List all tasks [GET]
 
@@ -384,7 +388,7 @@ FORMAT: 1A
 
 ## Task [/tasks/{id}]
 
-## Vehicle Collection [/vehicles]
+## Vehicle Collection [/vehicles?limit&offset]
 
 ### List all vehicles [GET]
 
