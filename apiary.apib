@@ -2,9 +2,11 @@ FORMAT: 1A
 
 # Sphere
 
+## Group Areas
+
 ## GET /areas?limit&offset
 
-List all areas 
+List all areas.
 
 + Parameters
 
@@ -33,9 +35,9 @@ List all areas
             }
         ]
 
-## Areas Collection [/areas]
+## POST /areas
 
-### Create a new area [POST]
+Create a new area.
 
 + Request (application/json)
 
@@ -55,9 +57,9 @@ List all areas
 
 + Response 200 (application/json)
 
-## Areas [/areas/{id}]
-        
-### Retrieve an area [GET]
+## GET /areas/{id}
+
+Retrieve an area.
 
 + Parameters
 
@@ -81,7 +83,9 @@ List all areas
             "url": "/area/1"
         }
 
-### Update an area [PUT]
+## PUT /areas/{id}
+
+Update an area.
 
 + Request Update JSON Message (application/json)
 
