@@ -2,469 +2,1233 @@ FORMAT: 1A
 
 # Sphere
 
-## Group Areas
+```
+/sphere/api/v1.0/
+```
 
-## GET /areas?limit={limit}&offset={offset}
+### Resources
+
+* [Areas](#areas)
+* [Complaints](#complaints)
+* [Contacts](#contacts)
+* [Customers](#customers)
+* [Customer Registrations](#customer-registrations)
+* [Depots](#depots)
+* [Dispatches](#dispatches)
+* [Orders](#orders)
+* [Price Categories](#price-categories)
+* [Products](#products)
+* [Regions](#regions)
+* [Stock Adjustments](#stock-adjustments)
+* [Tasks](#tasks)
+* [Vehicles](#vehicles)
+* [Weight Classes](#weight-classes)
+
+---
+
+## Areas 
+
+### Collection
+
+#### GET
 
 List all areas.
 
-+ Parameters
+##### Endpoint
 
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `20`
+```
+GET /areas?limit={limit}&offset={offset}
+```
 
-    + offset (number, optional) - Offset from which to start returning items.
-        + Default: `0`
+##### Parameters
 
-+ Response 200 (application/json)
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| `limit`  | The maximum number of results to return.    | number | true     | 20      |
+| `offset` | Offset from where to start returning items. | number | true     | 0       |
 
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
+##### Response 200 (application/json)
 
-## POST /areas
+```
+{
+    "links": {
+        "self": string
+    },
+    "data": [
+        {
+            "href": string 
+        } 
+    ]
+}
+```
+##### Attributes
+
+* `links`
+    * `self`
+
+* `data`
+    * `id`
+    * `name`
+
+##### Example 
+
+```
+GET /sphere/api/v1.0/areas
+```
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "links": {
+        "self": "/areas"
+    },
+    "data": [
+        {
+            "type": "areas",
+            "id": "1",
+            "title": "Area #1"
+        }, 
+        {
+            "type": "areas",
+            "id": "2",
+            "title": "Area #2"
+        }
+    ]
+}
+```
+
+### New area
+
+#### POST
 
 Create a new area.
 
-+ Request (application/json)
+##### Endpoint
 
-        {
-            "name": "Area 1",
-            "region": 5
-        }
+```
+POST /areas
+```
 
-An Area object has the following attributes:
+##### Request object
 
-+ name
-+ region
+```
+{
+    "name": string
+}
+```
 
-+ Response 201 
+##### Request parameters
 
-## GET /areas/{id}
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| name     | The area's name.                            | string |          | &nbsp;  |
 
-Retrieve an area.
+##### Response 200 (application/json)
 
-+ Parameters
+```
+{
+    "status": true,
+    "response_code": 200,
+    "message": "OK"
+}
+```
 
-    + id (number, required) - ID of the Area.
+### Area 
 
-+ Response 200 (application/json)
+#### Get Area
 
-        {
-            "name": "Area 1",
-            "region": {
-                "name": "Pemba",
-                "url": "/region/5"
+Fetch a specific area.
 
-            },
-            "depot": {
-                "name": "Grand Central Station",
-                "latitude": 0.0,
-                "longitude": 0.0,
-                "url": "/depot/2",
-            },
-            "url": "/area/1"
-        }
+##### Endpoint
 
-## PUT /areas/{id}
+```
+GET /areas/{id}
+```
+##### Parameters
 
-Update an area.
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the area.                         | number |          | &nbsp;  |
 
-+ Request Update JSON Message (application/json)
+##### Response 200 (application/json)
 
-        { "message": "All your base are belong to us." }
+```
+{
+    "name": string
+}
+```
 
-+ Response 204 (application/json)
+#### Put Area
 
-### Delete an area [DELETE]
+Update an existing area.
 
-+ Response 200 (application/json)
+##### Endpoint
 
-## Complaints Collection [/complaints?limit&offset]
+```
+PUT /areas/{id}
+```
 
-### List all complaints [GET]
+##### Parameters
 
-+ Parameters
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the area.                         | number |          | &nbsp;  |
 
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `20`
+#### Delete Area
 
-    + offset (number, optional) - Offset from which to start returning items.
-        + Default: `0`
+Delete an area.
 
-+ Response 200 (application/json)
+##### Endpoint
 
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
+```
+DELETE /areas/{id}
+```
 
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
+##### Parameters
 
-## Complaints [/complaints/{id}]
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the area.                         | number |          | &nbsp;  |
 
-## Customers Collection [/customers]
+## Complaints
 
-### List all customers [GET]
+### Collection
 
-+ Response 200 (application/json)
+#### Get Complaints
 
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
+##### Endpoint
 
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
+```
+GET /complaints?limit={limit}&offset={offset}
+```
 
-## Customers [/customers/{id}]
+##### Parameters
 
-## Customer Registrations Collection [/customer_registrations?limit&offset]
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
 
-### List all customer registrations [GET]
+#### Get Customer Complaints
 
-+ Response 200 (application/json)
+##### Endpoint
 
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
-
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
-
-## Customer Registrations [/customer_registrations/{id}]
+```
+GET /customers/{id}/complaints?limit={limit}&offset={offset}
+```
 
-## Depots Collection [/depots]
+##### Parameters
 
-### List all depots [GET]
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The customer's id.                          | number |          |         |
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
 
-+ Response 200 (application/json)
-
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
-
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
-
-## Depots [/depots/{id}]
-
-## Dispatches Collection [/dispatches?limit&offset]
+### Complaint
 
-### List all dispatches [GET]
+#### Get Complaint
 
-+ Parameters
+Fetch a specific complaint.
 
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `20`
+##### Endpoint
 
-    + offset (number, optional) - Offset from which to start returning items.
-        + Default: `0`
+```
+GET /complaints/{id}
+```
+##### Parameters
 
-+ Response 200 (application/json)
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the complaint.                    | number |          | &nbsp;  |
 
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
-
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
-
-## Dispatches [/dispatches/{id}]
+##### Response 200 (application/json)
 
-## Orders Collection [/orders?limit&offset]
+```
+@todo
+```
 
-### List all orders [GET]
+#### Put Complaint
 
-+ Parameters
-
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `20`
+Update an existing complaint.
 
-    + offset (number, optional) - Offset from which to start returning items.
-        + Default: `0`
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
-
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
+##### Endpoint
 
-## Orders [/orders/{id}]
+```
+PUT /complaints/{id}
+```
 
-## Price Categories Collection [/price_categories]
+##### Parameters
 
-### List all price categories [GET]
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the complaint.                    | number |          | &nbsp;  |
 
-+ Response 200 (application/json)
+#### Delete Complaint
 
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
+Delete a complaint.
 
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
+##### Endpoint
 
-## Price Categories [/price_categories/{id}]
+```
+DELETE /complaints/{id}
+```
 
-## Products Collection [/products?limit&offset]
+##### Parameters
 
-### List all products [GET]
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the complaint.                    | number |          | &nbsp;  |
 
-+ Parameters
+## Contacts
 
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `20`
+### Collection
 
-    + offset (number, optional) - Offset from which to start returning items.
-        + Default: `0`
+##### Endpoint
 
-+ Response 200 (application/json)
+```
+GET /contacts?limit={limit}&offset={offset}
+```
 
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
+##### Parameters
 
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
 
-## Products [/products/{id}]
+### Contact
 
-## Regions Collection [/regions]
+#### Get Contact
 
-### List all regions [GET]
+Fetch a specific contact.
 
-+ Response 200 (application/json)
+##### Endpoint
 
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
+```
+GET /contacts/{id}
+```
 
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
+##### Parameters
 
-## Regions [/regions/{id}]
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the contact.                      | number |          | &nbsp;  |
 
-### Retrieve a region [GET]
+##### Response 200 (application/json)
 
-+ Response 200 (application/json)
+```
+@todo
+```
 
-        {
-            "name": "Pemba",
-            "url": "/region/1"
-        }
+#### Put Contact
 
-## Stock Adjustments [/stock_adjustments]
+Update an existing contact.
 
-### Adjust stock for a product [POST]
+##### Endpoint
 
-+ Response 200 (application/json)
+```
+PUT /contacts/{id}
+```
 
-## Tasks Collection [/tasks?limit&offset]
+##### Parameters
 
-### List all tasks [GET]
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the contact.                      | number |          | &nbsp;  |
 
-+ Parameters
+#### Delete Contact
 
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `20`
+Delete a contact.
 
-    + offset (number, optional) - Offset from which to start returning items.
-        + Default: `0`
+##### Endpoint
 
-+ Response 200 (application/json)
+```
+DELETE /contacts/{id}
+```
 
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
+##### Parameters
 
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the contact.                      | number |          | &nbsp;  |
 
-## Tasks [/tasks/{id}]
+## Customers
 
-## Vehicles Collection [/vehicles?limit&offset]
+### Collection
 
-### List all vehicles [GET]
+##### Endpoint
 
-+ Parameters
+```
+GET /customers?limit={limit}&offset={offset}
+```
 
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `20`
+##### Parameters
 
-    + offset (number, optional) - Offset from which to start returning items.
-        + Default: `0`
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. |        | true     | 0       |
 
-+ Response 200 (application/json)
+### Customer
 
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
+#### Get Customer
 
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
+Fetch a specific customer.
 
-## Vehicles [/vehicles/{id}]
+##### Endpoint
 
-## Weight Classes Collection [/weight_classes]
+```
+GET /customers/{id}
+```
 
-### List all weight classes [GET]
+##### Parameters
 
-+ Response 200 (application/json)
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the customer.                     | number |          | &nbsp;  |
 
-        [
-            {
-                "name": "Area 1",
-                "region": {
-                    "name": "Pemba",
-                    "url": "/region/5"
+##### Response 200 (application/json)
 
-                },
-                "depot": {
-                    "name": "Grand Central Station",
-                    "latitude": 0.0,
-                    "longitude": 0.0,
-                    "url": "/depot/2",
-                },
-                "url": "/area/1"
-            }
-        ]
+```
+@todo
+```
 
-## Weight Classes [/weight_classes/{id}]
+#### Put Customer
+
+Update an existing customer.
+
+##### Endpoint
+
+```
+PUT /customers/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the customer.                     | number |          | &nbsp;  |
+
+#### Delete Customer
+
+Delete a customer.
+
+##### Endpoint
+
+```
+DELETE /customers/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the customer.                     | number |          | &nbsp;  |
+
+## Customer Registrations
+
+### Collection
+
+##### Endpoint
+
+```
+GET /customer_registrations?limit={limit}&offset={offset}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
+
+### Customer Registration
+
+#### Get Customer Registration
+
+Fetch a specific customer registration.
+
+##### Endpoint
+
+```
+GET /customer_registrations/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the customer registration.        | number |          | &nbsp;  |
+
+##### Response 200 (application/json)
+
+```
+@todo
+```
+
+#### Put Customer Registration
+
+Update an existing customer registration.
+
+##### Endpoint
+
+```
+PUT /customer_registrations/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the customer registration.        | number |          | &nbsp;  |
+
+#### Delete Customer Registration
+
+Delete a customer registration.
+
+##### Endpoint
+
+```
+DELETE /customer_registrations/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the customer registration.        | number |          | &nbsp;  |
+
+## Depots
+
+### Collection
+
+##### Endpoint
+
+```
+GET /depots?limit={limit}&offset={offset}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
+
+### Depot
+
+#### Get Depot
+
+Fetch a specific depot.
+
+##### Endpoint
+
+```
+GET /depots/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the depot.                        | number |          | &nbsp;  |
+
+##### Response 200 (application/json)
+
+```
+@todo
+```
+
+#### Put Depot
+
+Update an existing depot.
+
+##### Endpoint
+
+```
+PUT /depots/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the depot.                        | number |          | &nbsp;  |
+
+#### Delete Depot
+
+Delete a depot.
+
+##### Endpoint
+
+```
+DELETE /depots/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the depot.                        | number |          | &nbsp;  |
+
+
+## Dispatches
+
+### Collection
+
+##### Endpoint
+
+```
+GET /dispatches?limit={limit}&offset={offset}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
+
+### Dispatch
+
+#### Get Dispatch
+
+Fetch a specific dispatch.
+
+##### Endpoint
+
+```
+GET /dispatches/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the dispatch.                     | number |          | &nbsp;  |
+
+##### Response 200 (application/json)
+
+```
+@todo
+```
+
+#### Put Dispatch
+
+Update an existing dispatch.
+
+##### Endpoint
+
+```
+PUT /dispatches/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the dispatch.                     | number |          | &nbsp;  |
+
+#### Delete Dispatch
+
+Delete a dispatch.
+
+##### Endpoint
+
+```
+DELETE /dispatches/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the dispatch.                     | number |          | &nbsp;  |
+
+## Orders
+
+### Collection
+
+##### Endpoint
+
+```
+GET /orders?limit={limit}&offset={offset}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
+
+### Order
+
+#### Get Order
+
+Fetch a specific order.
+
+##### Endpoint
+
+```
+GET /orders/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the order.                        | number |          | &nbsp;  |
+
+##### Response 200 (application/json)
+
+```
+@todo
+```
+
+#### Put Order
+
+Update an existing order.
+
+##### Endpoint
+
+```
+PUT /orders/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the order.                        | number |          | &nbsp;  |
+
+#### Delete Order
+
+Delete a order.
+
+##### Endpoint
+
+```
+DELETE /orders/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the order.                        | number |          | &nbsp;  |
+
+## Price Categories
+
+### Collection
+
+##### Endpoint
+
+```
+GET /price_categories?limit={limit}&offset={offset}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
+
+### Price Category
+
+#### Get Price Category
+
+Fetch a specific price category.
+
+##### Endpoint
+
+```
+GET /price_categories/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the price category.               | number |          | &nbsp;  |
+
+##### Response 200 (application/json)
+
+```
+@todo
+```
+
+#### Put Price Category
+
+Update an existing price category.
+
+##### Endpoint
+
+```
+PUT /price_categories/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the price category.               | number |          | &nbsp;  |
+
+#### Delete Price Category
+
+Delete a price category.
+
+##### Endpoint
+
+```
+DELETE /price_categories/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the price category.               | number |          | &nbsp;  |
+
+## Products
+
+### Collection
+
+##### Endpoint
+
+```
+GET /products?limit={limit}&offset={offset}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
+
+### Product
+
+#### Get Product
+
+Fetch a specific product.
+
+##### Endpoint
+
+```
+GET /products/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the product.                      | number |          | &nbsp;  |
+
+##### Response 200 (application/json)
+
+```
+@todo
+```
+
+#### Put Product
+
+Update an existing product.
+
+##### Endpoint
+
+```
+PUT /products/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the product.                      | number |          | &nbsp;  |
+
+#### Delete Product
+
+Delete a product.
+
+##### Endpoint
+
+```
+DELETE /products/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the product.                      | number |          | &nbsp;  |
+
+## Regions
+
+### Collection
+
+##### Endpoint
+
+```
+GET /regions?limit={limit}&offset={offset}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
+
+### Region
+
+#### Get Region
+
+Fetch a specific region.
+
+##### Endpoint
+
+```
+GET /regions/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the region.                       | number |          | &nbsp;  |
+
+##### Response 200 (application/json)
+
+```
+@todo
+```
+
+#### Put Region
+
+Update an existing region.
+
+##### Endpoint
+
+```
+PUT /regions/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the region.                       | number |          | &nbsp;  |
+
+#### Delete Region
+
+Delete a region.
+
+##### Endpoint
+
+```
+DELETE /regions/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the region.                       | number |          | &nbsp;  |
+
+## Stock Adjustments
+
+### Collection
+
+##### Endpoint
+
+```
+GET /stock_adjustments?limit={limit}&offset={offset}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
+
+### Stock Adjustment
+
+#### Get Stock Adjustment
+
+Fetch a specific stock adjustment.
+
+##### Endpoint
+
+```
+GET /stock_adjustments/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the stock adjustment.             | number |          | &nbsp;  |
+
+##### Response 200 (application/json)
+
+```
+@todo
+```
+
+#### Put Stock Adjustment
+
+Update an existing customer.
+
+##### Endpoint
+
+```
+PUT /stock_adjustments/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the stock adjustment.             | number |          | &nbsp;  |
+
+#### Delete Stock Adjustment
+
+Delete a stock adjustment.
+
+##### Endpoint
+
+```
+DELETE /stock_adjustments/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the stock adjustment.             | number |          | &nbsp;  |
+
+## Tasks
+
+### Collection
+
+##### Endpoint
+
+```
+GET /tasks?limit={limit}&offset={offset}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
+
+### Task
+
+#### Get Customer
+
+Fetch a specific task.
+
+##### Endpoint
+
+```
+GET /tasks/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the task.                         | number |          | &nbsp;  |
+
+##### Response 200 (application/json)
+
+```
+@todo
+```
+
+#### Put Task
+
+Update an existing task.
+
+##### Endpoint
+
+```
+PUT /tasks/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the task.                         | number |          | &nbsp;  |
+
+#### Delete Task
+
+Delete a task.
+
+##### Endpoint
+
+```
+DELETE /tasks/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the task.                         | number |          | &nbsp;  |
+
+## Vehicles
+
+### Collection
+
+##### Endpoint
+
+```
+GET /vehicles?limit={limit}&offset={offset}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
+
+### Vehicle
+
+#### Get Customer
+
+Fetch a specific vehicle.
+
+##### Endpoint
+
+```
+GET /vehicles/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the vehicle.                      | number |          | &nbsp;  |
+
+##### Response 200 (application/json)
+
+```
+@todo
+```
+
+#### Put Vehicle
+
+Update an existing vehicle.
+
+##### Endpoint
+
+```
+PUT /vehicles/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the vehicle.                      | number |          | &nbsp;  |
+
+#### Delete Vehicle
+
+Delete a vehicle.
+
+##### Endpoint
+
+```
+DELETE /vehicles/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the vehicle.                      | number |          | &nbsp;  |
+
+## Weight Classes
+
+### Collection
+
+##### Endpoint
+
+```
+GET /weight_classes?limit={limit}&offset={offset}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| limit    | The maximum number of results to return.    | number | true     | 20      |
+| offset   | Offset from where to start returning items. | number | true     | 0       |
+
+### Weight Class
+
+#### Get Weight Class
+
+Fetch a specific weight class.
+
+##### Endpoint
+
+```
+GET /weight_classes/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the weight class.                 | number |          | &nbsp;  |
+
+##### Response 200 (application/json)
+
+```
+@todo
+```
+
+#### Put Weight Class
+
+Update an existing weight class.
+
+##### Endpoint
+
+```
+PUT /weight_classes/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the weight class.                 | number |          | &nbsp;  |
+
+#### Delete Weight Class
+
+Delete a weight class.
+
+##### Endpoint
+
+```
+DELETE /weight_classes/{id}
+```
+
+##### Parameters
+
+| Key      | Description                                 | Type   | Optional | Default |
+|----------|---------------------------------------------|--------|----------|---------|
+| id       | The id of the weight class.                 | number |          | &nbsp;  |
 
